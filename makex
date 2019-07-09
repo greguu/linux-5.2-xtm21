@@ -1,0 +1,16 @@
+#!/bin/bash
+CPPFLAGS="-D_FORTIFY_SOURCE=2"
+CFLAGS="-march=armeb -mtune=xscale -O2 -pipe -fstack-protector --param=ssp-buffer-size=4"
+CXXFLAGS="-march=armeb -mtune=xscale -O2 -pipe -fstack-protector --param=ssp-buffer-size=4"
+LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro"
+export BUILDMACH=x86_64-pc-linux-gnu
+export ARCH=arm
+export PATH='/home/operator/build/xtm22w/x-tools-new/bin':$PATH
+export CROSS_COMPILE=armeb-openwrt-linux-
+export STAGING_DIR=/home/operator/build/xtm22w/x-tools-new/armeb-openwrt-linux-muslgnueabi
+export CC=armeb-gnueabi-gcc
+export LD=armeb-gnueabi-ld
+export TARGET=armeb
+export HOSTCC=gcc
+make LOCALVERSION= -j24 "$1"
+
